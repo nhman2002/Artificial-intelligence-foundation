@@ -20,28 +20,16 @@ class MyAlgo:
     #READ INPUT DATA
     def read_file(self, input_file: str):
         with open(input_file, 'r') as file:
-        # Read the first line containing the sentence alpha
-            alpha_sentence = file.readline().strip()
-
-            # Read the second line containing the line indicating the number of clauses in the KB
-            kb_clause_count_line = file.readline().strip()
-
-            # Check if the line contains an integer (if not, set default value or handle accordingly)
-            if kb_clause_count_line.isdigit():
-                kb_clause_count = int(kb_clause_count_line)
-            else:
-                # Handle the case where the line does not contain a valid integer
-                kb_clause_count = 0  # You might want to set a default value or handle this case differently
-
-            # Read the next N lines representing clauses in the KB
-            kb_clauses = [file.readline().strip() for _ in range(kb_clause_count)]
-
-        # Process the alpha sentence
-        self.alpha = [alpha_sentence.split(Definition.OR_OPERATOR_DELIMETER.value)]
-
-        # Process the KB clauses
-        self.KB = [clause.split(Definition.OR_OPERATOR_DELIMETER.value) for clause in kb_clauses]
-        self.alpha = self.standard_cnf_sentence(self.alpha)
+            lines = file.readlines()
+        # alpha_index = 0 -> alpha nằm ở dòng thứ 1
+        # alpha_index = 1 -> alpha nằm ở dòng thứ 2
+        alpha_index = 1 if lines[0].strip().isdigit() else 0
+        # Tách alpha và KB
+        self.alpha = lines[alpha_index].strip().split(Definition.OR_OPERATOR_DELIMETER.value)
+        # Cắt từ dòng thứ 3 trở đi để lấy KB (sau câu alpha)
+        self.KB = [line.strip().split(Definition.OR_OPERATOR_DELIMETER.value) for line in lines[alpha_index + 2:]] 
+        # Chuẩn hóa alpha và KB
+        self.alpha = self.standard_cnf_sentence([self.alpha])
         self.KB = self.standard_cnf_sentence(self.KB)
         file.close()
     
