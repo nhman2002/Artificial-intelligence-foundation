@@ -1,12 +1,9 @@
-4
+3
 R OR S
 -P OR Q
--P
 P
-5
+2
 R
 Q OR S
-S
-Q
-{}
-YES 
+0
+NO

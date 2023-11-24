@@ -4,4 +4,4 @@ A OR B OR -C
 A OR -C
 -C OR -D
 {}
-YES 
+YES

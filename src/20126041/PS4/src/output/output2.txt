@@ -7,4 +7,4 @@ A OR -B
 1
 A OR -C
 0
-NO 
+NO

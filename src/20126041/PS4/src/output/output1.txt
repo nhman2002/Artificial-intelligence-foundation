@@ -7,4 +7,4 @@ B
 A OR C
 A OR -B
 {}
-YES 
+YES
